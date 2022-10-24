@@ -1,20 +1,20 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Chat from './pages/Chat';
-import Creater from './pages/Creater';
-import QuizStart from './pages/ScreenQuizStart';
-import Quiz from './pages/ScreenQuiz';
-import Room from './pages/ChallengerRoom';
+import {ChallenerFinishQuiz, ChallengerQuiz, ChallengerResult, ChallengerRoom, Creater, ScreenQuiz, ScreenQuizStart, ScreenResult} from './pages/index'
 
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Room />} />
+        <Route path='/' element={<ChallengerRoom />} />
         <Route path='/creater' element={<Creater />} />
-        <Route path='/quiz_starter' element={<QuizStart />} />
-        <Route path='/quiz' element={<Quiz />} />
-        <Route path='/quiz' element={<Chat />} />
+        <Route path='/quiz_starter' element={<ScreenQuizStart />} />
+        <Route path='/quiz' element={<ScreenQuiz />} />
+        <Route path='/quiz_c' element={<Chat />} />
+        <Route path='/quiz_c' element={<ChallengerQuiz />} />
+        <Route path='/finish' element={<ChallenerFinishQuiz />} />
+        <Route path='/result' element={<ScreenResult />} />
+        <Route path='/result_c' element={<ChallengerResult />} />
       </Routes>
     </BrowserRouter>
   );
