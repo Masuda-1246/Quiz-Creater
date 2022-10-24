@@ -10,7 +10,6 @@ function App() {
         <Route path='/creater' element={<Creater />} />
         <Route path='/quiz_starter' element={<ScreenQuizStart />} />
         <Route path='/quiz' element={<ScreenQuiz />} />
-        <Route path='/quiz_c' element={<Chat />} />
         <Route path='/quiz_c' element={<ChallengerQuiz />} />
         <Route path='/finish' element={<ChallenerFinishQuiz />} />
         <Route path='/result' element={<ScreenResult />} />
