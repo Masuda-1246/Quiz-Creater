@@ -26,7 +26,7 @@ function Creater() {
     const room_id = event.target.room_id.value
     const data_ref = ref(database, 'users/' + room_id)
     set(data_ref,{
-      flag:'false'
+      quiz:'false'
     })
     console.log(room_id)
     console.log(datas)
