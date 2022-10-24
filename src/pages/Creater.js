@@ -1,7 +1,8 @@
 import React,{useState} from 'react'
 import * as XLSX from "xlsx";
 import {useNavigate} from "react-router-dom"
-
+//room作成
+//ファイル入力
 function Creater() {
   const [datas, setDatas] = useState([])
   const navigate = useNavigate()

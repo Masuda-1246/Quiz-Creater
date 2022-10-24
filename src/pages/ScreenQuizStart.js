@@ -1,5 +1,7 @@
 import React from 'react'
 import {useLocation, useNavigate} from "react-router-dom"
+//注意事項
+//スタート画面
 const QuizStart = () => {
   const locate = useLocation()
   const navigate = useNavigate()
