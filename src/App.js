@@ -1,39 +1,22 @@
-import { ref, push, onValue } from "firebase/database";
-import {database} from "./firebase"
-import {useState} from "react"
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Chat from './pages/Chat';
+import Creater from './pages/Creater';
+import QuizStart from './pages/ScreenQuizStart';
+import Quiz from './pages/ScreenQuiz';
+import Room from './pages/ChallengerRoom';
 
 function App() {
-  const [datas, setDatas] = useState(['s'])
-  const data_ref = ref(database, 'users/' + '000')
-
-  const hundleSubmit = (event) => {
-    event.preventDefault()
-    const message = event.currentTarget.message.value
-    console.log(message)
-    push(ref(database, 'users/' + '000'), {
-      message:message
-    });
-  }
-
-  onValue(data_ref, (snapshot) => {
-    const data = snapshot.val();
-    const fetch_data = Object.values(data)
-    setDatas(fetch_data)
-  },{onlyOnce:true});
 
   return (
-    <div className="App">
-      <h1>Chatアプリ</h1>
-      <form onSubmit={hundleSubmit}>
-        <input type="text" name="message" />
-        <button>Send</button>
-      </form>
-      {
-        datas.map((data, index)=>
-        <p key={index}>{data.message}</p>
-        )
-      }
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Room />} />
+        <Route path='/creater' element={<Creater />} />
+        <Route path='/quiz_starter' element={<QuizStart />} />
+        <Route path='/quiz' element={<Quiz />} />
+        <Route path='/quiz' element={<Chat />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
