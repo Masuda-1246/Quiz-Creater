@@ -1,6 +1,8 @@
 import React,{useState} from 'react'
 import * as XLSX from "xlsx";
 import {useNavigate} from "react-router-dom"
+import { ref, update } from "firebase/database";
+import {database} from "../firebase"
 //room作成
 //ファイル入力
 function Creater() {
@@ -26,6 +28,10 @@ function Creater() {
   const handleSubmit = (event) => {
     event.preventDefault()
     const room_id = event.target.room_id.value
+    const data_ref = ref(database, 'users/' + room_id)
+    update(data_ref,{
+      flag:'false'
+    })
     console.log(room_id)
     console.log(datas)
     navigate("/quiz_starter",{state:{quiz:datas, room_id:room_id}})
