@@ -19,7 +19,7 @@ function Quiz() {
   },[])
   const handleClik = () => {
     set(ref(database, 'users/' + locate.state.room_id), {
-      quiz:locate.state.quiz[1]
+      quiz:locate.state.quiz[datas.No]
     });
   }
   return (
