@@ -10,10 +10,12 @@ const QuizStart = () => {
   console.log(locate.state)
   const handleClik = () => {
     const data_ref = ref(database, 'users/' + locate.state.room_id)
+    let data = locate.state.quiz[0]
+    data["last"] = false
     set(data_ref,{
-      quiz:locate.state.quiz[0]
+      quiz:data
     })
-    navigate("/quiz", {state:{quiz:locate.state.quiz, room_id:locate.state.room_id}})
+    navigate("/quiz", {state:{quiz:locate.state.quiz, room_id:locate.state.room_id,len:locate.state.len}})
   }
   return (
     <div>

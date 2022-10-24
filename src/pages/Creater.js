@@ -1,12 +1,13 @@
 import React,{useState} from 'react'
 import * as XLSX from "xlsx";
 import {useNavigate} from "react-router-dom"
-import { ref, update } from "firebase/database";
+import { ref, set } from "firebase/database";
 import {database} from "../firebase"
 //room作成
 //ファイル入力
 function Creater() {
   const [datas, setDatas] = useState([])
+  const [text, setText] = useState('')
   const navigate = useNavigate()
   const handleReadFile = (fileObj) => {
     if (fileObj) {
@@ -14,13 +15,8 @@ function Creater() {
         const workbook = XLSX.read(buffer, { type: 'buffer', bookVBA: true })
         const firstSheetName = workbook.SheetNames[0]
         const worksheet = workbook.Sheets[firstSheetName]
-        console.log(worksheet)
         const data = XLSX.utils.sheet_to_json(worksheet)
         const json_data = JSON.stringify(data)
-        console.log(json_data)
-        console.log(typeof json_data)
-        console.log(data)
-        console.log(typeof data)
         setDatas(data)
       })
     }
@@ -29,18 +25,18 @@ function Creater() {
     event.preventDefault()
     const room_id = event.target.room_id.value
     const data_ref = ref(database, 'users/' + room_id)
-    update(data_ref,{
+    set(data_ref,{
       flag:'false'
     })
     console.log(room_id)
     console.log(datas)
-    navigate("/quiz_starter",{state:{quiz:datas, room_id:room_id}})
+    navigate("/quiz_starter",{state:{quiz:datas, room_id:room_id, len:datas.length}})
   }
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <label>ルームID</label>
-        <input type="text"  name="room_id"/>
+        <input type="text"  name="room_id" onChange={(e)=>setText(e.target.value)}/>
         <br></br>
         <label>問題テンプレート</label>
         <input type="file" onChange={(e) => {
@@ -62,7 +58,7 @@ function Creater() {
           )
         }
         {
-          datas[0] && (
+          (datas[0]) && (
             <button>次へ</button>
           )
         }

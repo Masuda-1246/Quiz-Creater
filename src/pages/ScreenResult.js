@@ -4,9 +4,12 @@ import {useLocation, useNavigate} from "react-router-dom"
 function ScreenResult() {
   const locate = useLocation()
   const navigate = useNavigate()
-  console.log(locate.state)
+  setTimeout(()=>{navigate('/')},30000)
   return (
-    <div>ScreenResult</div>
+    <div>
+      問題はこれで終わりです。
+      みなさん、提出してください
+    </div>
   )
 }
 
