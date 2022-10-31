@@ -2,7 +2,7 @@ import React from 'react'
 //Challengerの結果
 function ChallengerResult() {
   return (
-    <div>ChallengerResult</div>
+    <div>結果発表までしばらくお待ちください</div>
   )
 }
 

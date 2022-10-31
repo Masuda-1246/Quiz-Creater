@@ -22,7 +22,7 @@ function Quiz() {
   },[])
   const handleNextButton = () => {
     if (isLast) {
-      navigate('/result')
+      navigate('/idle')
       return
     }
     setIsQuestion(false)

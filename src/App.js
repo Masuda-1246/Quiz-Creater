@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import {ChallenerFinishQuiz, ChallengerQuiz, ChallengerResult, ChallengerRoom, Creater, ScreenQuiz, ScreenQuizStart, ScreenResult} from './pages/index'
+import {ChallenerFinishQuiz, ChallengerQuiz, ChallengerResult, ChallengerRoom, Creater, ScreenQuiz, ScreenQuizStart, ScreenResult, ScreanIdle} from './pages/index'
 
 function App() {
 
@@ -14,6 +14,7 @@ function App() {
         <Route path='/finish' element={<ChallenerFinishQuiz />} />
         <Route path='/result' element={<ScreenResult />} />
         <Route path='/result_c' element={<ChallengerResult />} />
+        <Route path='/idle' element={<ScreanIdle />} />
       </Routes>
     </BrowserRouter>
   );

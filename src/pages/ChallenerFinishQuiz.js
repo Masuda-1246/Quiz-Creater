@@ -1,11 +1,12 @@
 import React,{useState, useEffect} from 'react'
-import {useLocation, useNavigate} from "react-router-dom"
+import {Navigate, useLocation, useNavigate} from "react-router-dom"
 import { ref, set, onValue } from "firebase/database";
 import {database} from "../firebase";
 import { getDoc, doc, setDoc } from 'firebase/firestore';
 
 //Challengerが結果を送信する画面
 function FinishQuiz() {
+  const navigate = useNavigate();
   const [data, setData] = useState();
   let myScore = 0;
   let result = [];
@@ -26,7 +27,8 @@ function FinishQuiz() {
       name : name,
       score : myScore
     }
-    setDoc(doc(database),list,{merge: true});
+    navigate('/result_c')
+    // setDoc(doc(database),list,{merge: true});
   }
 
   return (
@@ -37,7 +39,7 @@ function FinishQuiz() {
           <div key={index}>{list[0]}{list[1]}</div>
         )
       }
-      <form>
+      <form onSubmit={handleSubmit}>
         <input name="name" type="text" />
         <button>送信</button>
       </form>
