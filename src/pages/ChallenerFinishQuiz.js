@@ -1,44 +1,48 @@
-import React,{useState, useEffect} from 'react'
-import {Navigate, useLocation, useNavigate} from "react-router-dom"
-import { ref, set, onValue } from "firebase/database";
-import {database} from "../firebase";
-import { getDoc, doc, setDoc } from 'firebase/firestore';
+import React,{ useState, useEffect } from 'react'
+import { useNavigate } from "react-router-dom"
+import { db } from "../firebase"
+import { collection, addDoc } from 'firebase/firestore';
 
-//Challengerが結果を送信する画面
 function FinishQuiz() {
   const navigate = useNavigate();
-  const [data, setData] = useState();
-  let myScore = 0;
-  let result = [];
-  
-  console.log(localStorage)
-  for (let i = 1; i < 4; i++) {
-    var list = localStorage.getItem(i);
-    list = JSON.parse(list);
+  const result = JSON.parse(localStorage.getItem("quiz_my_quiz"))
+  const [lists, setLists] = useState([])
+  const room = result.room
+  const answer = result.answer
+  const score = result.score
+  useEffect(()=>{
+    const list = []
+    for (let i in Object.keys(answer)) {
+      const data = {
+        No:`${Object.keys(answer)[i]} 問目`,
+        A:Object.values(answer)[i]
+      }
+      list.push(data)
+    }
+    setLists(list)
+  },[])
 
-      result.push([i+"問目",list.choice])
-      myScore += list[0] == "〇" ? list[2] : 0;
-  }
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
     const name = event.target.name.value;
     let list = {
       name : name,
-      score : myScore
+      score:score
     }
+    localStorage.removeItem("quiz_my_quiz")
     navigate('/result_c')
-    // setDoc(doc(database),list,{merge: true});
+    await addDoc(collection(db,room),list,{merge: true})
   }
 
   return (
     <div>
-      <div>結果</div>
+      <div>あなたの結果</div>
       {
-        result.map((list, index) => 
-          <div key={index}>{list[0]}{list[1]}</div>
+        lists.map((list, index) => 
+          <div key={index}>{list.No} {list.A}</div>
         )
       }
+      <div>あなたのスコア: {score}</div>
       <form onSubmit={handleSubmit}>
         <input name="name" type="text" />
         <button>送信</button>

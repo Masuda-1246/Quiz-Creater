@@ -12,12 +12,18 @@ function ChallengerRoom() {
     event.preventDefault();
     const room = event.target.roomID.value;
     const data_ref = ref(database, 'users/' + room)
+    const localData = {
+      room:room,
+      answer:{},
+      score:0
+    }
     get(data_ref).then((snapshot) => {
       if (snapshot.exists()) {
         setError();
+        localStorage.setItem("quiz_my_quiz",JSON.stringify(localData))
         navigate('quiz_c',{state: {roomID:room}});
       } else {
-        setError("No data");
+        setError("Roomが存在しません");
       }
     }).catch((error) => {
       console.error(error);

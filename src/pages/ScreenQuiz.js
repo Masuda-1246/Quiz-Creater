@@ -11,18 +11,21 @@ function Quiz() {
   const [datas, setDatas] = useState()
   const [isQuestion, setIsQuestion] = useState(false)
   const [isLast, setIsLast] = useState(false)
-  // console.log(locate.state)
   useEffect(()=>{
     onValue(data_ref, (snapshot) => {
       const data = snapshot.val();
-      const fetch_data = Object.values(data)
-      // console.log(fetch_data)
-      setDatas(fetch_data[0])
+      if (data) {
+        const fetch_data = Object.values(data)
+        setDatas(fetch_data[0])
+      }
     });
   },[])
   const handleNextButton = () => {
     if (isLast) {
-      navigate('/idle')
+      navigate('/idle',{state:{room_id:locate.state.room_id}})
+      set(ref(database, 'users/' + locate.state.room_id), {
+        quiz:[]
+      })
       return
     }
     setIsQuestion(false)
