@@ -11,7 +11,6 @@ function Chat() {
   const hundleSubmit = (event) => {
     event.preventDefault()
     const message = event.currentTarget.message.value
-    console.log(message)
     push(ref(database, 'users/' + '000'), {
       message:message
     });
@@ -22,7 +21,6 @@ function Chat() {
       const data = snapshot.val();
       const fetch_data = Object.values(data)
       setDatas(fetch_data)
-      console.log('onValue')
     });
   },[])
 

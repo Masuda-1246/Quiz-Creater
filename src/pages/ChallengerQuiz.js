@@ -9,17 +9,13 @@ import Choices from "../components/Choices"
 function ChallengerQuiz() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [num, setNum] = useState();
+  const [question, setquestion] = useState();
   const [isHidden, setIsHidden] = useState(true)
-  const hundleClick = (event) => {
-    event.preventDefault()
-    navigate('/finish')
-  }
 
   useEffect(() => {
     const data_ref = ref(database, 'users/' + location.state.roomID)
     onValue(data_ref,(snapshot) => {
-      setNum(snapshot.val());
+      setquestion(snapshot.val());
       if (snapshot.val().quiz != "false") {
         setIsHidden(false)
       }
@@ -32,21 +28,8 @@ function ChallengerQuiz() {
         <Standby text="問題が始まるまで少々お待ちください" />
       </div>
       <div hidden={isHidden}>
-        <Choices
-          quiz={num?.quiz.q}
-          text1={num?.quiz.A}
-          text2={num?.quiz.B}
-          text3={num?.quiz.C}
-          text4={num?.quiz.D}
-          num={num?.quiz.No}
-          answer={num?.quiz.a}
-          score={num?.quiz.score}
-          last={num?.quiz.last}
-          />
+        <Choices quiz={question?.quiz} />
       </div>
-      <button style={{display: num?.quiz.last ? "block" : "none"}} onClick={hundleClick}>
-        結果画面へ
-      </button>
     </div>
   )
 }

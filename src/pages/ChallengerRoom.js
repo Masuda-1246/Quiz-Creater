@@ -20,6 +20,7 @@ function ChallengerRoom() {
     get(data_ref).then((snapshot) => {
       if (snapshot.exists()) {
         setError();
+        localStorage.removeItem("quiz_my_quiz")
         localStorage.setItem("quiz_my_quiz",JSON.stringify(localData))
         navigate('quiz_c',{state: {roomID:room}});
       } else {

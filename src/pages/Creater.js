@@ -28,8 +28,6 @@ function Creater() {
     set(data_ref,{
       quiz:'false'
     })
-    console.log(room_id)
-    console.log(datas)
     navigate("/quiz_starter",{state:{quiz:datas, room_id:room_id, len:datas.length}})
   }
   return (

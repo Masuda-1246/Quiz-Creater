@@ -31,12 +31,18 @@ function Quiz() {
     setIsQuestion(false)
     let lis = locate.state.quiz[datas.No]
     lis["last"] = lis.No == locate.state.len ? true:false
+    lis["end"] = false
     setIsLast(lis.No == locate.state.len ? true:false)
     set(ref(database, 'users/' + locate.state.room_id), {
       quiz:lis
     })
   }
   const handleAnswerButton = () => {
+    let lis = locate.state.quiz[datas.No-1]
+    lis["end"] = true
+    set(ref(database, 'users/' + locate.state.room_id), {
+      quiz:lis
+    })
     setIsQuestion(true)
   }
   return (
