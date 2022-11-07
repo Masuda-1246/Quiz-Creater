@@ -37,7 +37,8 @@ function Creater() {
         <label>ルームID</label>
         <input type="text"  name="room_id" onChange={(e)=>setText(e.target.value)}/>
         <br></br>
-        <input type="file" onChange={(e) => {
+        <input type="file" onClick={(()=>{console.log("aaa")})} onChange={(e) => {
+          console.log("aaa")
         e.preventDefault()
         handleReadFile(e.currentTarget.files[0])
         }}/>

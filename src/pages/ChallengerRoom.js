@@ -31,25 +31,15 @@ function ChallengerRoom() {
     });
   }
 
-  const header = {
-    borderTop: "17px solid #FA2A2A",
-    borderBottom: "17px solid #FF8000",
-    position: "relative",
-    height: "100vh"
-  }
-  const headerAfter = {
-    position: "absolute",
-    top: 0,
-    right: 0,
-    height: "100vh",
-    width: "50vw",
-    borderTop: "17px solid #01426C",
-    borderBottom: "17px solid #FFB800",
-  }
 
   return (
-    <div style={{backgroundColor: "#D9D9D9"}}>
-      <div style={header}>
+    <div style={{backgroundColor: "#D9D9D9", height:window.innerHeight}}>
+
+        <div style={{display:"flex"}}>
+          <div style={{backgroundColor:"#FA2A2A", height:"10px", width:'50%'}}/>
+          <div style={{backgroundColor:"#01426C", height:"10px", width:'50%'}}/>
+        </div>
+
         <div style={{display: "flex",minHeight: "100vh",flexDirection: "column", justifyContent: "center" , alignItems: "center"}}>
           <div style={{fontSize: "50px", fontWeight:"bold"}}>Kahoot!!</div>
           <form onSubmit={handleSubmit}>
@@ -60,8 +50,12 @@ function ChallengerRoom() {
           </form>
           <p>{error}</p>
         </div>
-      </div>
-      <div style={headerAfter}></div>
+
+        <div style={{display:"flex", position:"absolute", bottom:0, width:"100%"}}>
+          <div style={{backgroundColor:"#FF8000", height:"10px", width:'50%'}}/>
+          <div style={{backgroundColor:"#FFB800", height:"10px", width:'50%'}}/>
+        </div>
+
     </div>
   )
 }
