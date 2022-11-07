@@ -22,14 +22,33 @@ function ChallengerQuiz() {
     })
   },[]);
 
+  const header = {
+    borderTop: "17px solid #FA2A2A",
+    borderBottom: "17px solid #FF8000",
+    position: "relative",
+    height: "100vh"
+  }
+  const headerAfter = {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    height: "100vh",
+    width: "50vw",
+    borderTop: "17px solid #01426C",
+    borderBottom: "17px solid #FFB800",
+  }
+
   return (
-    <div>
-      <div hidden={!isHidden}>
-        <Standby text="問題が始まるまで少々お待ちください" />
+    <div style={{backgroundColor: "#D9D9D9"}}>
+      <div style={header}>
+        <div hidden={!isHidden}>
+          <Standby text="準備しています…" />……
+        </div>
+        <div hidden={isHidden}>
+          <Choices quiz={question?.quiz} />
+        </div>
       </div>
-      <div hidden={isHidden}>
-        <Choices quiz={question?.quiz} />
-      </div>
+      <div style={headerAfter}></div>
     </div>
   )
 }

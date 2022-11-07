@@ -31,14 +31,37 @@ function ChallengerRoom() {
     });
   }
 
+  const header = {
+    borderTop: "17px solid #FA2A2A",
+    borderBottom: "17px solid #FF8000",
+    position: "relative",
+    height: "100vh"
+  }
+  const headerAfter = {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    height: "100vh",
+    width: "50vw",
+    borderTop: "17px solid #01426C",
+    borderBottom: "17px solid #FFB800",
+  }
+
   return (
-    <div>
-      <div>ChallengerRoom</div>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="roomID" />
-        <button>roomに入る</button>
-      </form>
-      <p>{error}</p>
+    <div style={{backgroundColor: "#D9D9D9"}}>
+      <div style={header}>
+        <div style={{display: "flex",minHeight: "100vh",flexDirection: "column", justifyContent: "center" , alignItems: "center"}}>
+          <div style={{fontSize: "50px", fontWeight:"bold"}}>Kahoot!!</div>
+          <form onSubmit={handleSubmit}>
+            <input style={{border: "none", borderRadius: "80px", padding: "15px 30px", marginTop: "20px"}} type="text" placeholder="ルームIDを入力" name="roomID" />
+            <div style={{textAlign: "center"}}>
+            <button style={{borderRadius: "80px",fontSize: "10px", padding: "8px 40px", color: "white", backgroundColor: "black", fontWeight: "bold", marginTop: "50px"}}>参加する</button>
+            </div>
+          </form>
+          <p>{error}</p>
+        </div>
+      </div>
+      <div style={headerAfter}></div>
     </div>
   )
 }
