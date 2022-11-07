@@ -1,31 +1,36 @@
 import React, { useState, useEffect } from 'react'
-import {useLocation, useNavigate} from "react-router-dom"
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { useLocation } from "react-router-dom"
+import { collection, query, getDocs } from "firebase/firestore";
 import { db } from "../firebase"
 //結果表示
 function ScreenResult() {
   const locate = useLocation()
   const room_id = locate.state.room_id
   const [datas, setDatas] = useState([])
-  const list = []
+  let list = []
   const rank = async() => {
     const q = query(collection(db, room_id));
     const querySnapshot = await getDocs(q)
+    list = []
     querySnapshot.forEach((doc) => {
       list.push(doc.data())
     });
-    let top_score = list[0].score
-    let top_name = []
+    list.sort((a,b)=>{
+      return b.score - a.score
+    })
+    let ranking = 1
+    let pre_ranking = ranking
+    let score = list[0].score
     for (let i in list) {
-      if (list[i].score == top_score) {
-        top_name.push(list[i].name)
-      } else if (list[i].score > top_score) {
-        top_name = []
-        top_name.push(list[i].name)
-        top_score = list[i].score
+      if (score != list[i].score) {
+        pre_ranking = ranking
+        score = list[i].score
       }
+      ranking++
+      list[i]["ranking"] = pre_ranking
     }
-    setDatas(top_name)
+    console.log(list)
+    setDatas(list)
   }
   useEffect(()=>{
     rank()
@@ -38,7 +43,7 @@ function ScreenResult() {
       {
         datas.map((data, index)=>
           <div key={index}>
-            {data}
+            {data.ranking}位  名前：{data.name}さん
           </div>
         )
       }

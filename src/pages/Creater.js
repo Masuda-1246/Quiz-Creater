@@ -3,6 +3,7 @@ import * as XLSX from "xlsx";
 import {useNavigate} from "react-router-dom"
 import { ref, set } from "firebase/database";
 import {database} from "../firebase"
+import { getStorage } from "firebase/storage";
 //room作成
 //ファイル入力
 function Creater() {
@@ -36,7 +37,6 @@ function Creater() {
         <label>ルームID</label>
         <input type="text"  name="room_id" onChange={(e)=>setText(e.target.value)}/>
         <br></br>
-        <label>問題テンプレート</label>
         <input type="file" onChange={(e) => {
         e.preventDefault()
         handleReadFile(e.currentTarget.files[0])
