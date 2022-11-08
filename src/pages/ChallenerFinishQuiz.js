@@ -43,19 +43,29 @@ function FinishQuiz() {
       <div style={{backgroundColor:"#FA2A2A", height:"10px", width:'50%'}}/>
       <div style={{backgroundColor:"#01426C", height:"10px", width:'50%'}}/>
     </div>
-    <div style={{fontSize: "30px", fontWeight:"bold"}}>クイズ終了</div>
-    <div style={{backgroundColor:'white', width:"80%", display:"flex", alignItems:"center", flexDirection:"column"}}>
-      {
-        lists.map((list, index) => 
-          <div key={index}>{list.No}:  {list.A}</div>
-        )
-      }
+    <div style={{marginTop:"50px", fontSize: "26px", fontWeight:"bold", textAlign:"center"}}>クイズ終了</div>
+    <div style={{marginTop:"50px",  display:"flex", alignItems:"center", flexDirection:"column"}}>
+      <div style={{ width:"80%", display:"flex", alignItems:"center", flexDirection:"column", borderRadius:"20px"}}>
+        <div style={{backgroundColor:'white',padding:"9px 0", width: "220px", textAlign:"center", borderRadius:"10px 10px 0px 0px",margin:"1px"}}>回答一覧</div>
+        {
+          lists.map((list, index) => 
+            <div style={{position:"relative",display:"flex",justifyContent:"center", backgroundColor:'white',padding:"9px 0", width: "220px", textAlign:"center",margin:"1px"}} key={index}>
+              <div style={{position:"absolute", left:"20px"}}>{list.No}:</div>  
+              <div style={{textAlign: "center", color:list.A == "○" ? "red":"blue", fontWeight: "bold"}}>{list.A}</div>
+            </div>
+          )
+        }
+        <div style={{backgroundColor:'white',padding:"9px 0", width: "220px", textAlign:"center", borderRadius:"0px 0px 10px 10px",margin:"1px"}}></div>
+      </div>
+        <div style={{marginTop: "10px"}}>あなたのスコア: <span style={{fontSize:"26px"}}>{score}</span></div>
+        <form style={{textAlign:"center"}} onSubmit={handleSubmit}>
+          <div style={{fontWeight:"bold", margin:"25px "}}>ニックネームを入力して<br></br>あなたの回答を提出しよう！</div>
+          <input placeholder="ニックネームを入力して下さい" style={{border:"none", padding:"13px 30px", borderRadius:"80px"}} name="name" type="text" />
+          <div>
+            <button style={{border:"none", color:"white", backgroundColor:"black", borderRadius:"80px", padding:"8px 30px", marginTop:"30px"}}>提出する</button>
+          </div>
+        </form>
     </div>
-      <div>あなたのスコア: {score}</div>
-      <form onSubmit={handleSubmit}>
-        <input name="name" type="text" />
-        <button>送信</button>
-      </form>
 
     <div style={{display:"flex", position:"absolute", bottom:0, width:"100%"}}>
       <div style={{backgroundColor:"#FF8000", height:"10px", width:'50%'}}/>
