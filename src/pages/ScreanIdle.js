@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate, useLocation } from "react-router-dom"
-
+import line from "../images/line.png"
 
 
 function ScreanIdle() {
@@ -12,12 +12,15 @@ function ScreanIdle() {
   }
 
   return (
-    <div>
-      <div>
-      問題はこれで終わりです。
-      みなさん、提出してください
+    <div style={{backgroundColor: "#D9D9D9", position:"relative", minHeight:"100vh", display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
+      <div style={{position:"absolute", textAlign:"center"}}>
+        <div style={{fontWeight:"bold", fontSize:"30px"}}>
+        問題はこれで終わりです。<br></br>
+        ニックネームを入力して、提出してください
+        </div>
+        <button onClick={handleClik} style={{backgroundColor:"black", padding:"10px 40px", color:"white", borderRadius:"50px",fontWeight:"bold", marginTop:"80px"}}>ランキングを表示</button>
       </div>
-      <button onClick={handleClik}>結果発表</button>
+      <img src={line} style={{}} />
     </div>
   )
 }

@@ -11,6 +11,12 @@ function Quiz() {
   const [datas, setDatas] = useState()
   const [isQuestion, setIsQuestion] = useState(false)
   const [isLast, setIsLast] = useState(false)
+  const color = {
+    "A":"#FA2A2A",
+    "B":"#FF8000",
+    "C":"#FFB800",
+    "D":"#01426C"
+  }
   useEffect(()=>{
     onValue(data_ref, (snapshot) => {
       const data = snapshot.val();
@@ -46,18 +52,29 @@ function Quiz() {
     setIsQuestion(true)
   }
   return (
-    <div>
-      <div hidden={isQuestion}>
-        <div>問題：{datas?.q}</div>
-        <div>A:{datas?.A}</div>
-        <div>B:{datas?.B}</div>
-        <div>C:{datas?.C}</div>
-        <div>D:{datas?.D}</div>
-        <button onClick={handleAnswerButton}>答え</button>
+    <div style={{backgroundColor: "#D9D9D9", minHeight:"100vh",display:"flex", flexDirection:"column", justifyContent:"center", alignContent:"center"}}>
+      <div hidden={isQuestion} style={{textAlign:"center"}}>
+        <div style={{fontSize:"50px", fontWeight:"bold", marginBottom:"30px"}}>{datas?.q}</div>
+        <div style={{display:"flex", justifyContent:"space-between", margin:"30px 100px"}}>
+          <div style={{fontWeight:"bold", fontSize:"30px"}}>Q{datas?.No}</div>
+          <button style={{backgroundColor:"black", color:"white", borderRadius:"50px", padding:"5px 30px"}} onClick={handleAnswerButton}>答え</button>
+        </div>
+        <div>
+          <div style={{display:"flex", justifyContent:"center"}}>
+            <div style={{backgroundColor:"#FA2A2A", boxShadow:"3px 3px 10px gray", margin:"10px", width: "40%", padding:"30px 0", borderRadius:"3px", fontWeight:"bold", fontSize:"50px", color:"white"}}>{datas?.A}</div>
+            <div style={{backgroundColor:"#FF8000", boxShadow:"3px 3px 10px gray", margin:"10px", width: "40%", padding:"30px 0", borderRadius:"3px", fontWeight:"bold", fontSize:"50px", color:"white"}}>{datas?.B}</div>
+          </div>
+          <div style={{display: "flex", justifyContent:"center"}}>
+            <div style={{backgroundColor:"#FFB800", boxShadow:"3px 3px 10px gray", margin:"10px", width: "40%", padding:"30px 0", borderRadius:"3px", fontWeight:"bold", fontSize:"50px", color:"white"}}>{datas?.C}</div>
+            <div style={{backgroundColor:"#01426C", boxShadow:"3px 3px 10px gray", margin:"10px", width: "40%", padding:"30px 0", borderRadius:"3px", fontWeight:"bold", fontSize:"50px", color:"white"}}>{datas?.D}</div>
+          </div>
+        </div>
       </div>
-      <div hidden={!isQuestion} id="answer">
-        <div>答え: {datas?.a} {datas?.[datas?.a]}</div>
-        <button onClick={handleNextButton}>next</button>
+      <div hidden={!isQuestion} id="answer" style={{backgroundColor:color[datas?.a], minHeight:"100vh", display:isQuestion ? "flex" : "none", justifyContent:"center", alignItems:"center"}}>
+        <div style={{width: "70%", height:"80vh", backgroundColor:"#D9D9D9", borderRadius:"20px", display:"flex",flexDirection:"column", justifyContent:"center", alignItems:"center",boxShadow:"3px 3px 5px 3px gray inset"}}>
+          <div style={{color:color[datas?.a], fontSize:"120px", fontWeight:"bold", margin:"30px"}}>{datas?.[datas?.a]}</div>
+          <button onClick={handleNextButton} style={{backgroundColor:"black", color:"white", borderRadius:"50px", padding:"10px 40px"}}>次の問題へ進む</button>
+        </div>
       </div>
     </div>
   )
